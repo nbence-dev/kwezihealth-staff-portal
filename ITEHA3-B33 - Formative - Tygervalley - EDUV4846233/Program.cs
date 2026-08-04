@@ -1,9 +1,31 @@
+// https://www.youtube.com/watch?v=qhBF3eMpX0E&t=16s
+using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Data;
+using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Repositories;
+using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// configuring in-memory db
+builder.Services.AddDbContext<KweziHealthDbContext>(options =>
+{
+    options.UseInMemoryDatabase("KweziHealthDb");
+});
+builder.Services.AddScoped<StaffRepository>();
+builder.Services.AddScoped<StaffService>();
+// Pre-creating records 
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<KweziHealthDbContext>();
+    var seeder = new DataSeeder(context);
+    seeder.Seed();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -22,7 +44,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}")
+        pattern: "{controller=Access}/{action=Login}/{id?}")
     .WithStaticAssets();
 
 

@@ -1,0 +1,48 @@
+@model List<ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Models.StaffMember>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Kwezi Health - Staff</title>
+</head>
+<body>
+<div>
+    <h1>Staff Members</h1>
+</div>
+<div>
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("AddEditStaff", "Staff")'">Add Staff</button>
+</div>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col">Id</th>
+            <th class="col">Full Name</th>
+            <th class="col">Email</th>
+            <th class="col">Position</th>
+            <th class="col">Unit</th>
+            <th class="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var staffMember in Model)
+            {
+                <tr>
+                    <td>@staffMember.StaffId</td>
+                    <td>@staffMember.FullName</td>
+                    <td>@staffMember.Email</td>
+                    <td>@staffMember.Position</td>
+                    <td>@staffMember.Unit</td>
+                    <td><a href="@Url.Action("AddEditStaff", "Staff", new { id = staffMember.StaffId })" class="btn btn-primary">Edit</a>
+                    <form asp-action="DeleteStaff" asp-route-id="@staffMember.StaffId" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
