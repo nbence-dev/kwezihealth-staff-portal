@@ -2,6 +2,7 @@
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Data;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Repositories;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,11 +15,24 @@ builder.Services.AddDbContext<KweziHealthDbContext>(options =>
 {
     options.UseInMemoryDatabase("KweziHealthDb");
 });
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.LoginPath = "/Access/Login";
+    options.LogoutPath = "/Access/Logout";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+    options.SlidingExpiration = true;
+});
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<StaffRepository>();
 builder.Services.AddScoped<StaffService>();
+builder.Services.AddScoped<SystemAdminRepository>();
+builder.Services.AddScoped<AuthService>();
+
 // Pre-creating records 
 
 var app = builder.Build();
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -38,6 +52,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

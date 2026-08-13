@@ -32,3 +32,6 @@ Thumbs.db
 # Dependencies
 packages/
 .nuget/
+
+# CODE_AUDIT.md
+*_CODE_AUDIT.md

@@ -1,10 +1,5 @@
 @model ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Models.StaffMember
-<!DOCTYPE html>
 
-<html lang="en">
-<head>
-    <title>Add/Edit Staff</title>
-</head>
 @if (Model != null)
 {
     <h1>Edit Staff Member</h1>
@@ -13,26 +8,27 @@ else
 {
     <h1>Add Staff Member</h1>
 }
-<body>
+
+
 <div>
     <form method="post" asp-controller="Staff" asp-action="AddEditStaff" asp-route-id="@Model?.StaffId">
-        <input hidden class="form-control" type="number"  readonly value="@Model?.StaffId"/>    
+        <input hidden class="form-control" type="number" readonly value="@Model?.StaffId"/>
         <label class="form-label">
             Full Name
         </label>
-        <input class="form-control" type="text" asp-for="FullName" />    
+        <input class="form-control" type="text" asp-for="FullName"/>
         <label class="form-label">
             Email
         </label>
-        <input class="form-control" type="email" asp-for="Email" />    
+        <input class="form-control" type="email" asp-for="Email"/>
         <label class="form-label">
             Position
         </label>
-        <input class="form-control" type="text" asp-for="Position" />    
+        <input class="form-control" type="text" asp-for="Position"/>
         <label class="form-label">
             Unit
         </label>
-        <input class="form-control" type="number" asp-for="Unit" />    
+        <input class="form-control" type="number" asp-for="Unit"/>
         @if (Model != null)
         {
             <button class="btn btn-primary" type="submit">Edit Staff</button>
@@ -41,8 +37,7 @@ else
         {
             <button class="btn btn-primary" type="submit">Add Staff</button>
         }
-        
+
     </form>
 </div>
-</body>
-</html>
+

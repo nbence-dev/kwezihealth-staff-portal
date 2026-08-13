@@ -4,10 +4,12 @@ using System.Diagnostics;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.DTOs;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Models;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Controllers;
 
+[Authorize(Roles = "Admin")]
 public class StaffController : Controller
 {
     private readonly StaffService _staffService;
@@ -17,6 +19,7 @@ public class StaffController : Controller
         _staffService = staffService;
     }
     // GET
+    
     public async Task<IActionResult> Index()
     {
         var staffMembers = await _staffService.GetAllStaffMembers();
@@ -24,6 +27,7 @@ public class StaffController : Controller
     }
     // GET Add/Edit Staff view
     // Only display form
+    
     public async Task<IActionResult> AddEditStaff(int? id) // Id can be entered - if entered, it means edit
     {
         if (id != null)
@@ -37,8 +41,10 @@ public class StaffController : Controller
     // Add Staff
     // Receive input from form
     [HttpPost]
+    
     public async Task<IActionResult> AddEditStaff(int? id, StaffMemberDto staffMemberDto)
     {
+        // This means a member is going to be edited
         if (id != null)
         {
             await _staffService.UpdateStaffMemberDetails(id.Value, staffMemberDto);
@@ -48,7 +54,7 @@ public class StaffController : Controller
         {
             return BadRequest(ModelState);
         }
-
+        // This means a new member is going to be added
         var staffMember = new StaffMember
         {
             FullName = staffMemberDto.FullName,
@@ -63,6 +69,7 @@ public class StaffController : Controller
     
     // Delete staff
     [HttpPost]
+    
     public async Task<IActionResult> DeleteStaff(int id)
     {
         await _staffService.DeleteStaffMember(id);
@@ -70,4 +77,17 @@ public class StaffController : Controller
     }
     
     // Fetch staff by ID
+
+    [HttpPost]
+    public async Task<IActionResult> Search(int id)
+    {
+        // var staffMember = await _staffService.RetrieveStaffById(id);
+        // if (staffMember != null)
+        // {
+        //     return NotFound($"Staff member with ID {id} not found.");
+        // }
+        return RedirectToAction("AddEditStaff", new {id = id})
+        ;
+    }
+    
 }
