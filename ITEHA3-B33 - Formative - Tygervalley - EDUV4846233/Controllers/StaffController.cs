@@ -1,4 +1,5 @@
 // https://www.youtube.com/watch?v=CH2UVrkTQ8Y&t=1s
+// https://zetcode.com/asp-net/modelstate/
 
 using System.Diagnostics;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.DTOs;
@@ -19,23 +20,38 @@ public class StaffController : Controller
         _staffService = staffService;
     }
     // GET
-    
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         var staffMembers = await _staffService.GetAllStaffMembers();
         return View(staffMembers);
     }
     // GET Add/Edit Staff view
-    // Only display form
-    
+    // Only display form, yet if id is not null, display the data from the user being edited 
+    [HttpGet]
     public async Task<IActionResult> AddEditStaff(int? id) // Id can be entered - if entered, it means edit
     {
+        // id not equal to null
         if (id != null)
         {
+            // retrieve staff member by id
             var staffMember = await _staffService.RetrieveStaffById(id.Value);
-            return View(staffMember);
+            // if staff member not found, return notfound
+            if (staffMember == null) return NotFound();
+            
+            // create viewbag to pass to view bc StaffMemberDto doesn't have an Id property
+            ViewBag.StaffId = staffMember.StaffId;
+            var dto = new StaffMemberDto
+            {
+                FullName = staffMember.FullName,
+                Email = staffMember.Email,
+                Position = staffMember.Position,
+                Unit = staffMember.Unit
+            };
+            return View(dto);
         }
-        return View();
+        // 
+        return View(new  StaffMemberDto());
     }
 
     // Add Staff
@@ -44,16 +60,18 @@ public class StaffController : Controller
     
     public async Task<IActionResult> AddEditStaff(int? id, StaffMemberDto staffMemberDto)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(staffMemberDto);
+        }
         // This means a member is going to be edited
         if (id != null)
         {
             await _staffService.UpdateStaffMemberDetails(id.Value, staffMemberDto);
+            TempData["StatusMessage"] = "Staff member updated successfully.";
             return RedirectToAction("Index");
         }
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
+        
         // This means a new member is going to be added
         var staffMember = new StaffMember
         {
@@ -63,7 +81,7 @@ public class StaffController : Controller
             Unit = staffMemberDto.Unit
         };
         await _staffService.AddStaffMember(staffMember);
-        
+        TempData["StatusMessage"] = "Staff member added successfully.";
         return RedirectToAction("Index");
     }
     
@@ -73,6 +91,7 @@ public class StaffController : Controller
     public async Task<IActionResult> DeleteStaff(int id)
     {
         await _staffService.DeleteStaffMember(id);
+        TempData["StatusMessage"] = "Staff member deleted successfully.";
         return RedirectToAction("Index");
     }
     
@@ -80,14 +99,20 @@ public class StaffController : Controller
 
     [HttpPost]
     public async Task<IActionResult> Search(int id)
+    { 
+    if (id <= 0)
+    { 
+        TempData["ErrorMessage"] = "Please enter a valid staff ID.";                                                                                                                    
+        return RedirectToAction("Index");                                                                                                                                               
+    }
+    var staffMember = await _staffService.RetrieveStaffById(id);                                                                                                                        
+    if (staffMember == null)                                                                                                                                                            
     {
-        // var staffMember = await _staffService.RetrieveStaffById(id);
-        // if (staffMember != null)
-        // {
-        //     return NotFound($"Staff member with ID {id} not found.");
-        // }
-        return RedirectToAction("AddEditStaff", new {id = id})
-        ;
+        TempData["ErrorMessage"] = "No staff member found with that ID."; 
+        return RedirectToAction("Index"); 
+    }
+    TempData["StatusMessage"] = "Staff member loaded successfully.";
+    return RedirectToAction("AddEditStaff", new { id });
     }
     
 }

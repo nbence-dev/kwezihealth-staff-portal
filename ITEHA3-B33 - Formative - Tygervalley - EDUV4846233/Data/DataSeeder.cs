@@ -28,8 +28,8 @@ public class DataSeeder
     {
         return new List<StaffMember>
         {
-            new StaffMember {StaffId = 1, FullName = "John Doe", Email = "johndoe@gmail.com", Position = "Doctor", Unit = 1 },
-            new StaffMember {StaffId = 2, FullName = "Jane Smith", Email = "janesmith@gmail.com", Position = "Doctor", Unit = 1 },
+            new StaffMember { FullName = "John Doe", Email = "johndoe@gmail.com", Position = "Doctor", Unit = 1 },
+            new StaffMember { FullName = "Jane Smith", Email = "janesmith@gmail.com", Position = "Doctor", Unit = 1 },
             
         };
     }

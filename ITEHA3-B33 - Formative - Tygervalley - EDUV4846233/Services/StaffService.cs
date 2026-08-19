@@ -46,7 +46,7 @@ public class StaffService
             await _repository.UpdateStaff(existingStaffMember);
         }
     }
-    // Return bool?
+    
     public async Task DeleteStaffMember(int id)
     {
         await _repository.DeleteStaff(id);

@@ -2,6 +2,7 @@
 // https://medium.com/@ravitejherwatta/controllers-and-actions-in-asp-net-core-mvc-82f7f2fbdc8e
 // https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-10.0
 // https://stackoverflow.com/questions/19250017/prevent-access-to-page-based-on-authentication
+// https://www.youtube.com/watch?v=PUX3PzyBofg&t=1
 
 
 using System.Security.Claims;
@@ -23,6 +24,7 @@ public class AccessController : Controller
         _authService = authService;
     }
     // GET
+    [HttpGet]
     public IActionResult Login()
     {
         if (HttpContext.User.Identity.IsAuthenticated)
@@ -36,24 +38,29 @@ public class AccessController : Controller
     public async Task<IActionResult> Login(LoginDto loginDto)
     {
         // Test to see if username and password match
+        if (!ModelState.IsValid)
+        {
+            return View(loginDto);
+        }
         
         var isLoggedIn = await _authService.Login(loginDto);
+
         if (isLoggedIn)
         {
+            TempData["StatusMessage"] = "Logged in successfully.";
             return RedirectToAction("Index", "Staff");
         }
+
+        ModelState.AddModelError(string.Empty, "Invalid username or password");
         return View(loginDto);
-        
-        // Remember to validate and add errors
-        
-        
-        
     }
     
-    // POST
+    
+    [HttpPost]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        TempData["StatusMessage"] = "You have been logged out.";
         return RedirectToAction("Login");
     }
 }

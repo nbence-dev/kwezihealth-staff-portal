@@ -1,6 +1,6 @@
-@model ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Models.StaffMember
+@model ITEHA3_B33___Formative___Tygervalley___EDUV4846233.DTOs.StaffMemberDto
 
-@if (Model != null)
+@if (@ViewBag.StaffId !=null)
 {
     <h1>Edit Staff Member</h1>
 }
@@ -11,31 +11,39 @@ else
 
 
 <div>
-    <form method="post" asp-controller="Staff" asp-action="AddEditStaff" asp-route-id="@Model?.StaffId">
-        <input hidden class="form-control" type="number" readonly value="@Model?.StaffId"/>
+    <form method="post" asp-controller="Staff" asp-action="AddEditStaff" asp-route-id="@ViewBag.StaffId">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (ViewBag.StaffId != null)
+        {
+            <p class="text-muted">Editing staff member with ID: @ViewBag.StaffId</p>
+        }
         <label class="form-label">
             Full Name
         </label>
+        <span asp-validation-for="FullName" class="text-danger d-block"></span>
         <input class="form-control" type="text" asp-for="FullName"/>
         <label class="form-label">
             Email
         </label>
+        <span asp-validation-for="Email" class="text-danger d-block"></span>
         <input class="form-control" type="email" asp-for="Email"/>
         <label class="form-label">
             Position
         </label>
+        <span asp-validation-for="Position" class="text-danger d-block"></span>
         <input class="form-control" type="text" asp-for="Position"/>
         <label class="form-label">
             Unit
         </label>
+        <span asp-validation-for="Unit" class="text-danger d-block"></span>
         <input class="form-control" type="number" asp-for="Unit"/>
-        @if (Model != null)
+        @if (@ViewBag.StaffId != null)
         {
-            <button class="btn btn-primary" type="submit">Edit Staff</button>
+            <button class="btn btn-primary mt-2" type="submit">Edit Staff</button>
         }
         else
         {
-            <button class="btn btn-primary" type="submit">Add Staff</button>
+            <button class="btn btn-primary mt-2" type="submit">Add Staff</button>
         }
 
     </form>

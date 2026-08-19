@@ -1,10 +1,26 @@
-
+@model ITEHA3_B33___Formative___Tygervalley___EDUV4846233.DTOs.LoginDto
 <div>
     <form method="post" asp-controller="Access" asp-action="Login">
-        <label class="form-label">Username</label>
-        <input class="form-control" type="text" name="username"/>
-        <label class="form-label">Password</label>
-        <input class="form-control" type="password" name="password"/>
-        <button class="btn btn-primary" type="submit">Login</button>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div>
+            <span asp-validation-for="Username" class="text-danger d-block mt-1"></span>
+            <label class="form-label" asp-for="Username">Username</label>
+            <input class="form-control" type="text" asp-for="Username"/>
+
+        </div>
+        <div>
+            <span asp-validation-for="Password" class="text-danger d-block mt-1" ></span>
+            <label class="form-label" asp-for="Password">Password</label>
+            <input class="form-control" type="password" asp-for="Password"/>
+
+        </div>
+        
+        
+        <button class="btn btn-primary mt-2" type="submit">Login</button>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -34,4 +34,4 @@ packages/
 .nuget/
 
 # CODE_AUDIT.md
-*_CODE_AUDIT.md
+*CODE_AUDIT.md
