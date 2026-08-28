@@ -1,3 +1,4 @@
+// Deliverable 1: Core Application Models & Layered Structure — SystemAdmin domain model (Username, Password).
 // https://stackoverflow.com/questions/3406550/unique-constraint-with-data-annotation
 // https://www.codemag.com/Article/2301031/The-Rich-Set-of-Data-Annotation-and-Validation-Attributes-in-.NET
 using System.ComponentModel.DataAnnotations;

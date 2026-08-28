@@ -1,3 +1,4 @@
+// Deliverable 3: Controllers, Authentication & Views — admin lookup by username, used by AuthService during login.
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Data;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Models;
 using Microsoft.EntityFrameworkCore;

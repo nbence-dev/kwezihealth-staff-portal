@@ -1,3 +1,4 @@
+// Deliverable 2: Staff Management Service Layer — Add/GetAll/GetById/Update/Delete, independent of controllers, backed by an in-memory (EF Core InMemory) data store via StaffRepository.
 // https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions-1/models-data/validating-with-a-service-layer-cs
 
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.DTOs;

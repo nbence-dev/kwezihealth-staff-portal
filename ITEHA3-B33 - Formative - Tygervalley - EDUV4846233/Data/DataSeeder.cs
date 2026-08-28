@@ -1,3 +1,4 @@
+// Deliverable 2: Staff Management Service Layer — seeds the in-memory data store with initial StaffMember/SystemAdmin records.
 // https://stackoverflow.com/questions/70165802/minimal-web-api-and-seeding-an-in-memory-entity-framework-database
 
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Models;

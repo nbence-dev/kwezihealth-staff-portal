@@ -1,3 +1,4 @@
+// Deliverable 1: Core Application Models & Layered Structure — StaffMember domain model (StaffId, FullName, Email, Position, Unit).
 // https://learn.microsoft.com/en-us/aspnet/web-api/overview/older-versions/using-web-api-1-with-entity-framework-5/using-web-api-with-entity-framework-part-2
 // https://archidevineer.com/post/entity-framework-common-convention-error/
 

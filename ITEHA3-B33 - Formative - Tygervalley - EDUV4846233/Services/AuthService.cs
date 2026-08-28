@@ -1,3 +1,4 @@
+// Deliverable 3: Controllers, Authentication & Views — authentication logic (credential check, claims/cookie sign-in) used by AccessController.
 using System.Security.Claims;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.DTOs;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Repositories;

@@ -1,3 +1,4 @@
+// Deliverable 2: Staff Management Service Layer — in-memory (EF Core InMemory provider) persistence backing StaffService's CRUD operations.
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Data;
 using ITEHA3_B33___Formative___Tygervalley___EDUV4846233.Models;
 using Microsoft.EntityFrameworkCore;

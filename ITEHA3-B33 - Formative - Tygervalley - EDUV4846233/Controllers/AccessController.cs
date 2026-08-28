@@ -1,3 +1,4 @@
+// Deliverable 3: Controllers, Authentication & Views — administrator Login (GET/POST) and Logout (POST) with cookie-based session/authentication state.
 // https://stackoverflow.com/questions/3232013/get-and-post-to-same-controller-action-in-asp-net-mvc
 // https://medium.com/@ravitejherwatta/controllers-and-actions-in-asp-net-core-mvc-82f7f2fbdc8e
 // https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-10.0

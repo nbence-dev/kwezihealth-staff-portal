@@ -1,3 +1,4 @@
+// Deliverable 3: Controllers, Authentication & Views — validated input model for the StaffController create/edit (AddEditStaff) action.
 // https://www.youtube.com/watch?v=BlavB2Z4MIw
 // https://medium.com/@MJQuinn/asp-net-feedback-through-tempdata-91ef08827a90
 using System.ComponentModel.DataAnnotations;

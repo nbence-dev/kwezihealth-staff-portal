@@ -1,3 +1,4 @@
+// Deliverable 3: Controllers, Authentication & Views — Staff CRUD actions (Index/AddEditStaff/DeleteStaff), restricted to authenticated Admins via [Authorize(Roles = "Admin")].
 // https://www.youtube.com/watch?v=CH2UVrkTQ8Y&t=1s
 // https://zetcode.com/asp-net/modelstate/
 
