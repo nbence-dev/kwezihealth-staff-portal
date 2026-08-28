@@ -46,7 +46,7 @@ public class AuthService
             ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30),
         };
         
-        await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+        await _httpContextAccessor.HttpContext!.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
         return true;
     }
