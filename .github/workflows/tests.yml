@@ -1,26 +1,28 @@
-name: .NET Core CI
+name: Tests
 
-on: 
-    push:
-        branches: [ main ]
-    pull_request:
-        branches: [ main ]
-      
-  jobs:
-    build-and-test:
-      runs-on: ubuntu-latest
-      
-      steps:
-        - name: Check out repository code
-            uses: actions/checkout@v4
-            
-        - name: Setup .NET Core SDK
-            uses: actions/setup-dotnet@v4
-            with:
-                dotnet-version: '10.0.203'
-        
-        - name: Build solution
-            run: dotnet build --configuration Release
-            
-        - name: Run unit tests
-            run: dotnet test --configuration Release --no-build --verbosity normal
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.203'
+
+      - name: Restore
+        run: dotnet restore "ITEHA3-B33 - Formative - Tygervalley - EDUV4846233.sln"
+
+      - name: Build
+        run: dotnet build "ITEHA3-B33 - Formative - Tygervalley - EDUV4846233.sln" --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test "ITEHA3-B33 - Formative - Tygervalley - EDUV4846233.sln" --configuration Release --no-build --verbosity normal
